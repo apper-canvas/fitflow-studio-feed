@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "name": "Sarah Johnson",
+    "photo": "https://images.unsplash.com/photo-1494790108755-2616b6dec0a3?w=400&h=400&fit=crop&crop=face",
+    "specialties": ["yoga", "meditation", "breathwork"],
+    "bio": "Sarah is a certified yoga instructor with over 8 years of experience. She specializes in Vinyasa and Yin yoga, helping students find balance between strength and flexibility. Her classes focus on mindful movement and breath awareness, creating a peaceful environment for practitioners of all levels."
+  },
+  {
+    "id": "2",
+    "name": "Mike Rodriguez",
+    "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    "specialties": ["hiit", "functional training", "strength conditioning"],
+    "bio": "Mike brings 10+ years of personal training experience to every HIIT session. Former collegiate athlete turned fitness coach, he's passionate about helping people push their limits safely. His high-energy workouts are designed to maximize results while keeping sessions fun and motivating."
+  },
+  {
+    "id": "3",
+    "name": "Emma Thompson",
+    "photo": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+    "specialties": ["pilates", "core training", "rehabilitation"],
+    "bio": "Emma is a classically trained Pilates instructor with certifications in both mat and reformer work. With a background in physical therapy, she brings anatomical knowledge to every session, helping clients build strength while preventing injury. Her precise cueing helps students master proper form."
+  },
+  {
+    "id": "4",
+    "name": "David Chen",
+    "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    "specialties": ["cycling", "endurance training", "music-driven workouts"],
+    "bio": "David is a former competitive cyclist who now channels his passion for the sport into energetic spin classes. Known for his carefully curated playlists and motivational coaching style, he creates an atmosphere where riders can push their limits while having fun. His classes blend technique with pure cardio excitement."
+  },
+  {
+    "id": "5",
+    "name": "Lisa Adams",
+    "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face",
+    "specialties": ["strength training", "powerlifting", "olympic lifting"],
+    "bio": "Lisa is a competitive powerlifter and certified strength coach with expertise in Olympic lifting techniques. She focuses on teaching proper form and progressive overload principles to help clients build functional strength safely. Her encouraging approach makes strength training accessible to beginners while challenging advanced lifters."
+  },
+  {
+    "id": "6",
+    "name": "Maria Garcia",
+    "photo": "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=400&h=400&fit=crop&crop=face",
+    "specialties": ["dance fitness", "cardio", "latin dance"],
+    "bio": "Maria brings professional dance experience to her fitness classes, combining Latin rhythms with effective cardio workouts. Her infectious energy and easy-to-follow choreography make exercise feel like a celebration. She believes fitness should be joyful and creates an inclusive environment where everyone can move at their own pace."
+  }
+]

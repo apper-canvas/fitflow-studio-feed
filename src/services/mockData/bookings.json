@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "classId": "1",
+    "userId": "user123",
+    "status": "confirmed",
+    "bookedAt": "2024-01-10T14:30:00Z",
+    "position": 8
+  },
+  {
+    "id": "2",
+    "classId": "3",
+    "userId": "user123",
+    "status": "confirmed",
+    "bookedAt": "2024-01-09T16:45:00Z",
+    "position": 3
+  },
+  {
+    "id": "3",
+    "classId": "7",
+    "userId": "user123",
+    "status": "confirmed",
+    "bookedAt": "2024-01-11T09:15:00Z",
+    "position": 12
+  },
+  {
+    "id": "4",
+    "classId": "2",
+    "userId": "user456",
+    "status": "confirmed",
+    "bookedAt": "2024-01-08T11:20:00Z",
+    "position": 5
+  },
+  {
+    "id": "5",
+    "classId": "4",
+    "userId": "user456",
+    "status": "confirmed",
+    "bookedAt": "2024-01-12T13:10:00Z",
+    "position": 18
+  }
+]
