@@ -1,11 +1,16 @@
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { format, parseISO } from 'date-fns';
-import ApperIcon from './ApperIcon';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
+import Badge from '@/components/atoms/Badge';
+import AvailabilityBar from '@/components/atoms/AvailabilityBar';
+import { CLASS_TYPE_COLORS } from '@/config/constants';
 
 const BookingModal = ({ classItem, onConfirm, onClose }) => {
   if (!classItem) return null;
 
-  const isAvailable = classItem.bookedCount < classItem.capacity;
+  const isAvailable = classItem.bookedCount &lt; classItem.capacity;
   const availableSpots = classItem.capacity - classItem.bookedCount;
 
   return (
@@ -33,26 +38,21 @@ const BookingModal = ({ classItem, onConfirm, onClose }) => {
               <h2 className="text-xl font-heading font-bold text-gray-900">
                 Book Class
               </h2>
-              <button
+              <Button
                 onClick={onClose}
                 className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <ApperIcon name="X" size={20} />
-              </button>
+              </Button>
             </div>
 
             {/* Class type badge */}
             <div className="flex items-center gap-2">
-              <span className={`px-3 py-1 rounded-full text-sm font-medium capitalize border ${
-                classItem.type === 'yoga' ? 'bg-green-100 text-green-800 border-green-200' :
-                classItem.type === 'pilates' ? 'bg-purple-100 text-purple-800 border-purple-200' :
-                classItem.type === 'hiit' ? 'bg-red-100 text-red-800 border-red-200' :
-                classItem.type === 'spin' ? 'bg-blue-100 text-blue-800 border-blue-200' :
-                classItem.type === 'strength' ? 'bg-orange-100 text-orange-800 border-orange-200' :
-                'bg-pink-100 text-pink-800 border-pink-200'
-              }`}>
+              <Badge className={CLASS_TYPE_COLORS[classItem.type]}>
                 {classItem.type}
-              </span>
+              </Badge>
               <span className={`text-sm font-medium ${
                 isAvailable ? 'text-green-600' : 'text-red-600'
               }`}>
@@ -131,17 +131,7 @@ const BookingModal = ({ classItem, onConfirm, onClose }) => {
                 <span>Class capacity</span>
                 <span>{classItem.bookedCount}/{classItem.capacity}</span>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
-                <div
-                  className={`h-2 rounded-full transition-all ${
-                    (classItem.bookedCount / classItem.capacity) * 100 >= 90 ? 'bg-red-500' :
-                    (classItem.bookedCount / classItem.capacity) * 100 >= 70 ? 'bg-orange-500' :
-                    (classItem.bookedCount / classItem.capacity) * 100 >= 50 ? 'bg-yellow-500' :
-                    'bg-green-500'
-                  }`}
-                  style={{ width: `${(classItem.bookedCount / classItem.capacity) * 100}%` }}
-                />
-              </div>
+              <AvailabilityBar value={classItem.bookedCount} max={classItem.capacity} />
             </div>
 
             {/* Booking Terms */}
@@ -159,18 +149,14 @@ const BookingModal = ({ classItem, onConfirm, onClose }) => {
 
             {/* Action Buttons */}
             <div className="flex gap-3">
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+              <Button
                 onClick={onClose}
                 className="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-all font-medium"
               >
                 Cancel
-              </motion.button>
+              </Button>
               
-              <motion.button
-                whileHover={{ scale: isAvailable ? 1.02 : 1 }}
-                whileTap={{ scale: isAvailable ? 0.98 : 1 }}
+              <Button
                 onClick={() => isAvailable && onConfirm(classItem)}
                 disabled={!isAvailable}
                 className={`flex-1 px-4 py-3 rounded-lg font-medium transition-all ${
@@ -178,9 +164,11 @@ const BookingModal = ({ classItem, onConfirm, onClose }) => {
                     ? 'gradient-primary text-white hover:shadow-lg'
                     : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                 }`}
+                whileHover={{ scale: isAvailable ? 1.02 : 1 }}
+                whileTap={{ scale: isAvailable ? 0.98 : 1 }}
               >
                 {isAvailable ? 'Confirm Booking' : 'Class Full'}
-              </motion.button>
+              </Button>
             </div>
 
             {!isAvailable && (

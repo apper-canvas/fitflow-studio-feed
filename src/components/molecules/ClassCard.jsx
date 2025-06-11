@@ -1,15 +1,19 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { format, parseISO } from 'date-fns';
-import ApperIcon from './ApperIcon';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
+import Badge from '@/components/atoms/Badge';
+import AvailabilityBar from '@/components/atoms/AvailabilityBar';
+import { CLASS_TYPE_COLORS } from '@/config/constants';
 
-const ClassCard = ({ classItem, onBook, colorClass }) => {
-  const isAvailable = classItem.bookedCount < classItem.capacity;
+const ClassCard = ({ classItem, onBook, footerComponent, colorClass = CLASS_TYPE_COLORS[classItem.type] }) => {
+  const isAvailable = classItem.bookedCount &lt; classItem.capacity;
   const availableSpots = classItem.capacity - classItem.bookedCount;
-  const fillPercentage = (classItem.bookedCount / classItem.capacity) * 100;
 
   const getAvailabilityStatus = () => {
     if (!isAvailable) return { text: 'Full', color: 'text-red-600' };
-    if (availableSpots <= 2) return { text: `${availableSpots} spots left`, color: 'text-orange-600' };
+    if (availableSpots &lt;= 2) return { text: `${availableSpots} spots left`, color: 'text-orange-600' };
     return { text: `${availableSpots} spots available`, color: 'text-green-600' };
   };
 
@@ -18,15 +22,15 @@ const ClassCard = ({ classItem, onBook, colorClass }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.02, y: -2 }}
-      className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all"
+      className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all h-full"
     >
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-2">
-            <span className={`px-2 py-1 rounded-full text-xs font-medium capitalize border ${colorClass}`}>
+            <Badge className={colorClass}>
               {classItem.type}
-            </span>
+            </Badge>
             <span className={`text-sm font-medium ${status.color}`}>
               {status.text}
             </span>
@@ -64,19 +68,7 @@ const ClassCard = ({ classItem, onBook, colorClass }) => {
           <span>Capacity</span>
           <span>{classItem.bookedCount}/{classItem.capacity}</span>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: `${fillPercentage}%` }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className={`h-2 rounded-full transition-colors ${
-              fillPercentage >= 90 ? 'bg-red-500' :
-              fillPercentage >= 70 ? 'bg-orange-500' :
-              fillPercentage >= 50 ? 'bg-yellow-500' :
-              'bg-green-500'
-            }`}
-          />
-        </div>
+        <AvailabilityBar value={classItem.bookedCount} max={classItem.capacity} />
       </div>
 
       {/* Equipment */}
@@ -104,20 +96,22 @@ const ClassCard = ({ classItem, onBook, colorClass }) => {
         </div>
       )}
 
-      {/* Book Button */}
-      <motion.button
-        whileHover={{ scale: isAvailable ? 1.02 : 1 }}
-        whileTap={{ scale: isAvailable ? 0.98 : 1 }}
-        onClick={() => isAvailable && onBook(classItem)}
-        disabled={!isAvailable}
-        className={`w-full py-3 px-4 rounded-lg font-medium transition-all ${
-          isAvailable
-            ? 'gradient-primary text-white hover:shadow-lg'
-            : 'bg-gray-200 text-gray-500 cursor-not-allowed'
-        }`}
-      >
-        {isAvailable ? 'Book Now' : 'Class Full'}
-      </motion.button>
+      {/* Action Button / Custom Footer */}
+      {footerComponent ? footerComponent : (
+        <Button
+          onClick={() => isAvailable && onBook(classItem)}
+          disabled={!isAvailable}
+          className={`w-full py-3 px-4 rounded-lg font-medium transition-all ${
+            isAvailable
+              ? 'gradient-primary text-white hover:shadow-lg'
+              : 'bg-gray-200 text-gray-500 cursor-not-allowed'
+          }`}
+          whileHover={{ scale: isAvailable ? 1.02 : 1 }}
+          whileTap={{ scale: isAvailable ? 0.98 : 1 }}
+        >
+          {isAvailable ? 'Book Now' : 'Class Full'}
+        </Button>
+      )}
     </motion.div>
   );
 };

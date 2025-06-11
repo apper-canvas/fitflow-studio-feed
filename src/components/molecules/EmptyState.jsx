@@ -1,5 +1,7 @@
+import React from 'react';
 import { motion } from 'framer-motion';
-import ApperIcon from './ApperIcon';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
 
 const EmptyState = ({ 
   icon = "Package", 
@@ -32,14 +34,12 @@ const EmptyState = ({
         </p>
         
         {actionLabel && onAction && (
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+          <Button
             onClick={onAction}
             className="gradient-primary text-white px-6 py-3 rounded-lg font-medium transition-all hover:shadow-lg"
           >
             {actionLabel}
-          </motion.button>
+          </Button>
         )}
       </motion.div>
     </div>

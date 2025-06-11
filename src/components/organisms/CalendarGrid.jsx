@@ -1,6 +1,7 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { format, parseISO, isSameDay } from 'date-fns';
-import ApperIcon from './ApperIcon';
+import AvailabilityBar from '@/components/atoms/AvailabilityBar';
 
 const CalendarGrid = ({ weekDays, classes, onBookClass, classTypeColors }) => {
   const timeSlots = [
@@ -15,14 +16,6 @@ const CalendarGrid = ({ weekDays, classes, onBookClass, classTypeColors }) => {
       const classTime = format(classDate, 'HH:mm');
       return isSameDay(classDate, day) && classTime === timeSlot;
     });
-  };
-
-  const getAvailabilityColor = (bookedCount, capacity) => {
-    const percentage = (bookedCount / capacity) * 100;
-    if (percentage >= 90) return 'bg-red-500';
-    if (percentage >= 70) return 'bg-orange-500';
-    if (percentage >= 50) return 'bg-yellow-500';
-    return 'bg-green-500';
   };
 
   return (
@@ -49,9 +42,9 @@ const CalendarGrid = ({ weekDays, classes, onBookClass, classTypeColors }) => {
 
           {/* Time slots and classes */}
           {timeSlots.map((timeSlot) => (
-            <>
+            <React.Fragment key={`time-${timeSlot}`}>
               {/* Time label */}
-              <div key={`time-${timeSlot}`} className="text-sm text-gray-600 text-center py-4 border-t border-gray-100">
+              <div className="text-sm text-gray-600 text-center py-4 border-t border-gray-100">
                 {format(new Date(`2000-01-01T${timeSlot}`), 'h:mm a')}
               </div>
               
@@ -94,10 +87,7 @@ const CalendarGrid = ({ weekDays, classes, onBookClass, classTypeColors }) => {
                           
                           {/* Availability indicator */}
                           <div className="flex items-center gap-1">
-                            <div
-                              className={`w-2 h-2 rounded-full ${getAvailabilityColor(classItem.bookedCount, classItem.capacity)}`}
-                              title={`${classItem.bookedCount}/${classItem.capacity} booked`}
-                            />
+                            <AvailabilityBar value={classItem.bookedCount} max={classItem.capacity} className="w-2 h-2 rounded-full" />
                             <span className="text-xs opacity-75">
                               {classItem.capacity - classItem.bookedCount}
                             </span>
@@ -115,7 +105,7 @@ const CalendarGrid = ({ weekDays, classes, onBookClass, classTypeColors }) => {
                   </div>
                 );
               })}
-            </>
+            </React.Fragment>
           ))}
         </div>
 

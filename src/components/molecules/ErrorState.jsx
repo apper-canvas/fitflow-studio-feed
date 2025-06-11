@@ -1,5 +1,7 @@
+import React from 'react';
 import { motion } from 'framer-motion';
-import ApperIcon from './ApperIcon';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
 
 const ErrorState = ({ message = "Something went wrong", onRetry }) => {
   return (
@@ -26,14 +28,12 @@ const ErrorState = ({ message = "Something went wrong", onRetry }) => {
         </p>
         
         {onRetry && (
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+          <Button
             onClick={onRetry}
             className="gradient-primary text-white px-6 py-3 rounded-lg font-medium transition-all hover:shadow-lg"
           >
             Try Again
-          </motion.button>
+          </Button>
         )}
       </motion.div>
     </div>

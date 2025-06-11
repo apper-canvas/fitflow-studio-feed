@@ -1,8 +1,10 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import ApperIcon from '../components/ApperIcon';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
 
-const Home = () => {
+const HomePage = () => {
   const navigate = useNavigate();
 
   return (
@@ -30,18 +32,16 @@ const Home = () => {
           Your fitness journey starts here. Book classes, track your progress, and achieve your goals with our expert instructors.
         </p>
         
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+        <Button
           onClick={() => navigate('/schedule')}
           className="gradient-primary text-white py-4 px-8 rounded-lg font-medium text-lg transition-all hover:shadow-lg"
         >
           View Class Schedule
           <ApperIcon name="ArrowRight" className="w-5 h-5 ml-2 inline" />
-        </motion.button>
+        </Button>
       </motion.div>
     </div>
   );
 };
 
-export default Home;
+export default HomePage;
