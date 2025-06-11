@@ -5,7 +5,7 @@ import EmptyState from '@/components/molecules/EmptyState';
 
 const MyBookingsList = ({ bookings, filter, cancellingId, onCancel }) => {
   return (
-    &lt;&gt;
+    <>
       {bookings.length === 0 ? (
         <EmptyState
           icon="BookOpen"
